@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  parseGrid, gridToString, renderGridText, PEERS, UNITS, findConflicts, combinations,
+  parseGrid, gridToString, renderGridText, PEERS, UNITS, UNITS_OF, findConflicts, combinations,
 } from './grid';
 
 describe('grid', () => {
@@ -18,6 +18,7 @@ describe('grid', () => {
   it('each cell has exactly 20 peers and 3 units', () => {
     expect(PEERS[0]).toHaveLength(20);
     expect(UNITS).toHaveLength(27);
+    expect(UNITS_OF[0]).toHaveLength(3);
   });
 
   it('detects duplicate givens in a unit', () => {
