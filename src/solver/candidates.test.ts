@@ -19,6 +19,7 @@ describe('Board', () => {
     expect(b.candAt(0, 0)).toBeNull();
     expect(b.candAt(0, 1)!.has(7)).toBe(false); // same row
     expect(b.candAt(1, 1)!.has(7)).toBe(false); // same box
+    expect(b.candAt(3, 0)!.has(7)).toBe(false); // same column, outside box 0
   });
 
   it('isSolved() is false for a non-full grid', () => {
