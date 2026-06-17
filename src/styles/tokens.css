@@ -161,3 +161,36 @@ body {
 .multi-dialog { max-width: 460px; }
 .multi-text { color: var(--body); font-size: 15px; line-height: 1.6; margin: 0 0 4px; }
 .multi-text b { color: var(--primary); }
+
+/* Técnicas — mini board animation */
+.mb-wrap { display: flex; gap: 14px; align-items: flex-start; }
+.mb-col { display: flex; flex-direction: column; gap: 8px; align-items: center; flex-shrink: 0; }
+.mb-grid {
+  display: grid; grid-template-columns: repeat(9, 1fr); gap: 1px; width: 156px; height: 156px;
+  background: var(--hairline-strong); border: 1px solid var(--hairline-strong);
+  border-radius: 5px; overflow: hidden;
+}
+.mb-cell {
+  background: var(--surface-elevated); display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--muted); transition: background .35s, color .35s;
+}
+.mb-given { color: var(--ink); }
+.mb-hl { background: var(--primary); color: var(--on-primary); font-weight: 800; }
+.mb-peer { background: var(--surface-peer); }
+.mb-elim { color: var(--error); }
+.mb-strike { text-decoration: line-through; }
+.mb-place { background: var(--success); color: var(--on-primary); font-weight: 800; }
+.mb-br { border-right: 1.5px solid var(--hairline-strong); }
+.mb-bb { border-bottom: 1.5px solid var(--hairline-strong); }
+.mb-btn {
+  font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 8px;
+  border: 1px solid var(--hairline-strong); background: var(--surface-elevated);
+  color: var(--ink); cursor: pointer; white-space: nowrap; width: 100%;
+}
+.mb-btn:hover:not(:disabled) { background: var(--surface-card); }
+.mb-btn:disabled { opacity: .6; cursor: default; }
+.mb-cap {
+  font-size: 12.5px; color: var(--body); line-height: 1.5; flex: 1; min-height: 60px;
+  border-left: 2px solid var(--hairline-strong); padding-left: 12px;
+}
+.mb-cap-idle { color: var(--muted-soft); }
