@@ -507,6 +507,19 @@ const TechniquesPage = lazy(() => import('./components/TechniquesPage'));
 
 ---
 
+## Task 8: Puzzle pool integrity (added after approval)
+
+**Files:** Create `scripts/regen_evil.py`, `src/data/puzzles.test.ts`; modify `src/data/puzzles.json`.
+
+- [ ] **Step 1: Failing regression test** — `puzzles.test.ts` asserts every puzzle in each
+  tier is 81 cells, conflict-free, `solve()` → `solved && unique && !usedBacktracking`.
+  Run → FAIL on evil (24 backtracking puzzles).
+- [ ] **Step 2: Regenerate evil** — `python3 scripts/regen_evil.py --out src/data/puzzles.json`
+  drops the 24 backtracking evil puzzles and refills with logic-solvable evil-tier puzzles
+  (score ≥ evil lower bound), seed 12345, to 100. easy/medium/hard untouched.
+- [ ] **Step 3: Run** — `npx vitest run src/data/puzzles.test.ts` → PASS (all tiers clean).
+- [ ] **Step 4: Commit** — `git commit -m "fix(data): purge logic-incomplete evil puzzles + pool integrity test"`.
+
 ## Self-review notes
 
 - **Spec coverage:** Item 1 A/B/C → Tasks 1–3; Item 2 nav/page/cases/animation/verification

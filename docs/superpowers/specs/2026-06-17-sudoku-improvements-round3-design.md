@@ -155,6 +155,23 @@ Constructed (wings/swordfish) cases are authored directly in `techniqueCases.ts`
 
 ---
 
+## Item 3 — Puzzle pool integrity (added after approval)
+
+The pool (`src/data/puzzles.json`, 100/difficulty) is validated for puzzles that are
+**impossible** (no solution / contradictory) or **incompletos**. Measured results:
+impossible/non-unique = **0%** in all four tiers; the only defect is **logic-incomplete**
+puzzles — ones the solver can't finish with logic and completes by backtracking, so the
+step-by-step explanation is incomplete. Counts: easy/medium/hard **0%**, **evil 24%**.
+
+Rule applied per difficulty: bad **< 20%** → just remove; **≥ 20%** → remove + regenerate
+to **> 80**. Only **evil** (24%) crosses the threshold:
+- Drop the 24 backtracking evil puzzles.
+- Refill with hard, **logic-solvable** puzzles whose difficulty score is ≥ the evil tier's
+  lower bound, until evil is back to 100. easy/medium/hard are left untouched.
+- Reproducible script `scripts/regen_evil.py` (reuses `generate_pool.py`/`sudoku_solver.py`,
+  seed 12345). Committed test `src/data/puzzles.test.ts` asserts **every** stored puzzle is
+  81 cells, conflict-free, uniquely solvable, and solved **without backtracking**.
+
 ## Architecture / new files
 
 - New: `src/components/ErrorBoundary.tsx`, `src/components/MultipleSolutionsDialog.tsx`,
