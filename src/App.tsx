@@ -10,6 +10,7 @@ import { Celebration, CELEBRATION } from './components/Celebration';
 import { StepPlayer } from './components/StepPlayer';
 import { ProtocolView } from './components/ProtocolView';
 import { useMediaQuery, useElementHeight } from './hooks/layout';
+import { playStatus } from './solver/play';
 import { loadRandomPuzzle } from './data/loadPuzzles';
 import type { Difficulty } from './data/loadPuzzles';
 
@@ -20,9 +21,11 @@ const EXAMPLE = [
 
 export default function App() {
   const [cells, setCells] = useState<Grid>(() => parseGrid(EXAMPLE));
-  const [mode, setMode] = useState<'edit' | 'solved'>('edit');
+  const [mode, setMode] = useState<'edit' | 'solved' | 'play'>('edit');
   const [result, setResult] = useState<SolveResult | null>(null);
   const [givens, setGivens] = useState<Grid>(emptyGrid());
+  const [solution, setSolution] = useState<Grid | null>(null);
+  const [playGrid, setPlayGrid] = useState<Grid>(() => emptyGrid());
   const [stepIndex, setStepIndex] = useState(0);
   const [selected, setSelected] = useState<Coord | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +33,13 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const isDesktop = useMediaQuery('(min-width: 881px)');
   const [boardCardRef, boardCardH] = useElementHeight<HTMLDivElement>();
-  const celebrate = mode === 'solved' && !!result && stepIndex === result.steps.length - 1;
+  const status = useMemo(
+    () => (mode === 'play' && solution ? playStatus(playGrid, givens, solution) : null),
+    [mode, solution, playGrid, givens],
+  );
+  const celebrate =
+    (mode === 'solved' && !!result && stepIndex === result.steps.length - 1) ||
+    (mode === 'play' && !!status?.complete);
 
   const conflicts = useMemo(() => (mode === 'edit' ? findConflicts(cells) : []), [cells, mode]);
   const filledCount = useMemo(() => cells.flat().filter((v) => v).length, [cells]);
@@ -43,11 +52,34 @@ export default function App() {
   const canCheck = conflicts.length === 0 && filledCount > 0 && validity.unique;
 
   function setCell(r: number, c: number, v: number) {
+    if (mode === 'play') {
+      if (givens[r][c]) return;
+      setPlayGrid((g) => {
+        const n = cloneGrid(g);
+        n[r][c] = v;
+        return n;
+      });
+      return;
+    }
     setCells((g) => {
       const n = cloneGrid(g);
       n[r][c] = v;
       return n;
     });
+  }
+
+  function handleCheck() {
+    setError(null);
+    const { count, solution: sol } = countSolutions(cells, 2);
+    if (count !== 1 || !sol) {
+      setError('Conferir precisa de uma solução única.');
+      return;
+    }
+    setSolution(sol);
+    setGivens(cloneGrid(cells));
+    setPlayGrid(cloneGrid(cells));
+    setSelected(null);
+    setMode('play');
   }
 
   function handleSolve() {
@@ -68,6 +100,11 @@ export default function App() {
   }
 
   function handleClear() {
+    if (mode === 'play') {
+      setPlayGrid(cloneGrid(givens));
+      setSelected(null);
+      return;
+    }
     setCells(emptyGrid());
     setResult(null);
     setMode('edit');
@@ -94,6 +131,7 @@ export default function App() {
   function handleEdit() {
     setMode('edit');
     setResult(null);
+    setSolution(null);
     setError(null);
   }
 
@@ -122,8 +160,9 @@ export default function App() {
         <div className="card board-card" ref={boardCardRef}>
           <Board
             mode={mode}
-            editGrid={cells}
-            givens={mode === 'solved' ? givens : cells}
+            editGrid={mode === 'play' ? playGrid : cells}
+            givens={mode === 'edit' ? cells : givens}
+            solution={solution ?? undefined}
             view={view}
             conflicts={conflicts}
             selected={selected}
@@ -131,7 +170,7 @@ export default function App() {
             setCell={setCell}
             celebrate={CELEBRATION.boardGlow && celebrate}
           />
-          {mode === 'edit' && (
+          {(mode === 'edit' || mode === 'play') && (
             <NumberPad
               disabled={!selected}
               onInput={(d) => selected && setCell(selected.r, selected.c, d)}
@@ -153,7 +192,7 @@ export default function App() {
             canCheck={canCheck}
             loading={loading}
             onSolve={handleSolve}
-            onCheck={() => {}}
+            onCheck={handleCheck}
             onClear={handleClear}
             onEdit={handleEdit}
             onRandom={handleRandom}
@@ -163,6 +202,10 @@ export default function App() {
 
           {mode === 'edit' && !validity.solvable && (
             <div className="banner error">Este Sudoku não tem solução. Revise as pistas.</div>
+          )}
+
+          {mode === 'edit' && filledCount > 0 && conflicts.length === 0 && validity.solvable && !validity.unique && (
+            <div className="muted note">Conferir precisa de solução única (este tem mais de uma).</div>
           )}
 
           {mode === 'solved' && result && (
@@ -194,7 +237,18 @@ export default function App() {
           {mode === 'edit' && (
             <div className="card hint">
               <div className="mlabel">Como usar</div>
-              <div>Clique numa célula e digite 1–9 (ou Backspace para apagar). Use as setas para navegar. Depois clique em <b>Resolver</b>.</div>
+              <div>Clique numa célula e digite 1–9 (ou Backspace para apagar). Use as setas para navegar. Depois clique em <b>Resolver</b> — ou em <b>Conferir</b> para resolver você mesmo.</div>
+            </div>
+          )}
+
+          {mode === 'play' && (
+            <div className="card hint">
+              <div className="mlabel">Conferindo</div>
+              <div>
+                Preencha as células vazias. <b style={{ color: 'var(--success)' }}>Verde</b> = certo,{' '}
+                <b style={{ color: 'var(--error)' }}>vermelho</b> = errado.
+                {status?.complete && <> <b style={{ color: 'var(--primary)' }}>Resolvido!</b></>}
+              </div>
             </div>
           )}
         </div>
