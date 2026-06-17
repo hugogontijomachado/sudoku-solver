@@ -70,6 +70,19 @@ body {
 .status .mlabel, .hint .mlabel { color: var(--muted); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
 .status div, .hint div { color: var(--body); font-size: 14px; line-height: 1.6; }
 
+.numpad { margin-top: 16px; }
+.numpad-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.numpad-btn {
+  min-height: 48px; border-radius: 8px; border: 1px solid var(--hairline-strong);
+  background: var(--surface-elevated); color: var(--ink);
+  font-family: inherit; font-size: 20px; font-weight: 600; cursor: pointer;
+}
+.numpad-btn:hover:not(:disabled) { background: var(--surface-card); }
+.numpad-btn:active:not(:disabled) { background: var(--primary); color: var(--on-primary); }
+.numpad-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.numpad-erase { font-size: 18px; color: var(--body); }
+.numpad-hint { margin-top: 10px; color: var(--muted); font-size: 13px; text-align: center; }
+
 .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow: auto; z-index: 10; }
 .protocol { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; padding: 32px; max-width: 760px; width: 100%; }
 .protocol h2 { margin: 0 0 16px; font-size: 24px; }

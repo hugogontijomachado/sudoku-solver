@@ -5,6 +5,7 @@ import { solve, hasSolution } from './solver/solve';
 import type { SolveResult } from './solver/solve';
 import { Board } from './components/Board';
 import { Toolbar } from './components/Toolbar';
+import { NumberPad } from './components/NumberPad';
 import { StepPlayer } from './components/StepPlayer';
 import { ProtocolView } from './components/ProtocolView';
 
@@ -111,6 +112,13 @@ export default function App() {
             setSelected={setSelected}
             setCell={setCell}
           />
+          {mode === 'edit' && (
+            <NumberPad
+              disabled={!selected}
+              onInput={(d) => selected && setCell(selected.r, selected.c, d)}
+              onErase={() => selected && setCell(selected.r, selected.c, 0)}
+            />
+          )}
           <div className="legend">
             <span><i className="sw-given" />pista (digitada)</span>
             <span><i className="sw-filled" />preenchido pelo solver</span>
