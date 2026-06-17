@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate:pool": "python3 scripts/generate_pool.py --target 100 --out src/data/puzzles.json",
+    "smoke": "bash scripts/smoke/run.sh"
   },
   "dependencies": {
     "react": "^19.2.6",

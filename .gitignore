@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Python (puzzle generator tooling under scripts/)
+__pycache__/
+*.pyc
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -29,7 +29,34 @@ npm test         # run the solver test suite
 npm run build    # production build into dist/
 ```
 
+## Puzzle pool
+
+The random puzzles come from `src/data/puzzles.json` (100 each easy/medium/hard/evil),
+loaded on demand via a dynamic import. To regenerate them (offline, needs only `python3`):
+
+```bash
+python3 scripts/generate_pool.py --target 100 --out src/data/puzzles.json
+```
+
+The generator (`scripts/generate_pool.py` + its bundled reference solver
+`scripts/sudoku_solver.py`) makes unique puzzles, scores each by solving effort, and bands
+them into four difficulty tiers (seed-fixed → reproducible).
+
+## End-to-end smokes
+
+Headless-Chrome checks driven via the DevTools Protocol (no extra dependencies):
+
+```bash
+bash scripts/smoke/run.sh            # build + serve + run the suites
+bash scripts/smoke/run.sh smoke4     # a single suite
+```
+
 ## Deploy (Vercel)
 
 Connect the GitHub repo to Vercel. Framework preset: **Vite**.
 Build command `npm run build`, output directory `dist`. No environment variables.
+
+## Contributing / architecture
+
+See [`CLAUDE.md`](./CLAUDE.md) for the full architecture, conventions, and design system
+(`DESIGN.md`). Specs and plans live in `docs/superpowers/`.
