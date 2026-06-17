@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { parseGrid, gridToString, UNITS } from './grid';
-import { solve } from './solve';
+import { solve, hasSolution } from './solve';
 
 const PUZZLE = [
   '...5...6.',
@@ -65,5 +65,20 @@ describe('solve — edge cases', () => {
   it('flags multiple solutions for an empty grid', () => {
     const res = solve(parseGrid('.'.repeat(81)));
     expect(res.unique).toBe(false);
+  });
+});
+
+describe('hasSolution', () => {
+  it('is true for a solvable puzzle', () => {
+    expect(hasSolution(parseGrid(PUZZLE))).toBe(true);
+  });
+
+  it('is true for the empty grid', () => {
+    expect(hasSolution(parseGrid('.'.repeat(81)))).toBe(true);
+  });
+
+  it('is false for an unsolvable grid (no candidate, no duplicate)', () => {
+    const unsolvable = '12345678.' + '........9' + '.'.repeat(63);
+    expect(hasSolution(parseGrid(unsolvable))).toBe(false);
   });
 });

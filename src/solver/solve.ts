@@ -62,6 +62,10 @@ export function countSolutions(grid: Grid, limit = 2): { count: number; solution
   return { count, solution: found };
 }
 
+export function hasSolution(grid: Grid): boolean {
+  return countSolutions(grid, 1).count > 0;
+}
+
 export function solve(grid: Grid): SolveResult {
   if (findConflicts(grid).length)
     throw new Error('Pistas contraditórias: há dígitos repetidos numa mesma linha, coluna ou bloco.');
