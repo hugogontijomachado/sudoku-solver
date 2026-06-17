@@ -1,0 +1,8 @@
+@media print {
+  body * { visibility: hidden; }
+  .protocol, .protocol * { visibility: visible; }
+  .protocol { position: absolute; inset: 0; max-width: none; border: 0; border-radius: 0; background: #fff; color: #000; }
+  .protocol pre { background: #f4f4f4; color: #000; }
+  .protocol li, .protocol li b { color: #000; }
+  .protocol .actions { display: none; }
+}
