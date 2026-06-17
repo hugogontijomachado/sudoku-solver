@@ -66,6 +66,25 @@ export function hasSolution(grid: Grid): boolean {
   return countSolutions(grid, 1).count > 0;
 }
 
+// Fills one random empty cell with a value taken from a real solution, so the result is
+// always consistent (and nudges a non-unique grid toward uniqueness). Returns a clone;
+// returns null when the grid is already full or has no solution. `rng` is injectable for
+// deterministic tests.
+export function fillRandomValidCell(grid: Grid, rng: () => number = Math.random): Grid | null {
+  const empties: number[] = [];
+  for (let r = 0; r < 9; r++)
+    for (let c = 0; c < 9; c++) if (grid[r][c] === 0) empties.push(r * 9 + c);
+  if (empties.length === 0) return null;
+  const { solution } = countSolutions(grid, 1);
+  if (!solution) return null;
+  const pick = empties[Math.min(empties.length - 1, Math.floor(rng() * empties.length))];
+  const r = Math.floor(pick / 9);
+  const c = pick % 9;
+  const out = cloneGrid(grid);
+  out[r][c] = solution[r][c];
+  return out;
+}
+
 export function solve(grid: Grid): SolveResult {
   if (findConflicts(grid).length)
     throw new Error('Pistas contraditórias: há dígitos repetidos numa mesma linha, coluna ou bloco.');

@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { parseGrid, gridToString, UNITS } from './grid';
-import { solve, hasSolution } from './solve';
+import { solve, hasSolution, fillRandomValidCell, countSolutions } from './solve';
+
+const nonEmpty = (g: ReturnType<typeof parseGrid>) =>
+  [...gridToString(g)].filter((ch) => ch !== '0').length;
 
 const PUZZLE = [
   '...5...6.',
@@ -65,6 +68,53 @@ describe('solve — edge cases', () => {
   it('flags multiple solutions for an empty grid', () => {
     const res = solve(parseGrid('.'.repeat(81)));
     expect(res.unique).toBe(false);
+  });
+});
+
+describe('fillRandomValidCell', () => {
+  const blank = '.'.repeat(81);
+
+  it('adds exactly one filled cell to an empty grid', () => {
+    const out = fillRandomValidCell(parseGrid(blank), () => 0);
+    expect(out).not.toBeNull();
+    expect(nonEmpty(out!)).toBe(1);
+  });
+
+  it('keeps the grid solvable (the new digit comes from a real solution)', () => {
+    const out = fillRandomValidCell(parseGrid(blank), () => 0.5)!;
+    expect(countSolutions(out, 1).count).toBeGreaterThan(0);
+  });
+
+  it('reduces the number of solutions toward uniqueness as cells are added', () => {
+    let g = parseGrid('472531869' + '.'.repeat(72)); // one full row of givens -> still non-unique
+    expect(countSolutions(g, 2).count).toBe(2);
+    for (let i = 0; i < 40; i++) {
+      const next = fillRandomValidCell(g, Math.random);
+      if (!next) break;
+      g = next;
+      if (countSolutions(g, 2).count === 1) break;
+    }
+    expect(countSolutions(g, 2).count).toBe(1);
+  });
+
+  it('does not mutate the input grid', () => {
+    const g = parseGrid(blank);
+    const snapshot = gridToString(g);
+    fillRandomValidCell(g, () => 0);
+    expect(gridToString(g)).toBe(snapshot);
+  });
+
+  it('is deterministic given a fixed rng', () => {
+    const a = gridToString(fillRandomValidCell(parseGrid(blank), () => 0)!);
+    const b = gridToString(fillRandomValidCell(parseGrid(blank), () => 0)!);
+    expect(a).toBe(b);
+  });
+
+  it('returns null when the grid is already full', () => {
+    const full = parseGrid(
+      '472531869859642317163987254318726495597314682624859173936478521741265938285193746',
+    );
+    expect(fillRandomValidCell(full)).toBeNull();
   });
 });
 
