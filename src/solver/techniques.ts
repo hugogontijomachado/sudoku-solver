@@ -56,7 +56,7 @@ export function hiddenSingle(b: Board): Step[] {
   return [];
 }
 
-function nakedSubset(b: Board, k: number): Step[] {
+export function nakedSubset(b: Board, k: number): Step[] {
   const name = { 2: 'Par nu', 3: 'Trio nu', 4: 'Quadra nua' }[k]!;
   for (const unit of UNITS) {
     const empties = unit.filter(({ r, c }) => b.cand[r * 9 + c]);
@@ -89,7 +89,7 @@ function nakedSubset(b: Board, k: number): Step[] {
   return [];
 }
 
-function hiddenSubset(b: Board, k: number): Step[] {
+export function hiddenSubset(b: Board, k: number): Step[] {
   const name = { 2: 'Par escondido', 3: 'Trio escondido', 4: 'Quadra escondida' }[k]!;
   for (const unit of UNITS) {
     const empties = unit.filter(({ r, c }) => b.cand[r * 9 + c]);

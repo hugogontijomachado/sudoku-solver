@@ -1,0 +1,843 @@
+{
+  "naked-single": {
+    "grid": "000000020001009080050010030000000090406002000017600500000000400004020018700030002",
+    "frames": [
+      {
+        "caption": "Esta célula ficou com um único candidato possível.",
+        "cells": [
+          {
+            "idx": 36,
+            "cls": "peer"
+          },
+          {
+            "idx": 37,
+            "cls": "peer"
+          },
+          {
+            "idx": 38,
+            "cls": "peer"
+          },
+          {
+            "idx": 39,
+            "cls": "peer"
+          },
+          {
+            "idx": 40,
+            "cls": "peer"
+          },
+          {
+            "idx": 41,
+            "cls": "peer"
+          },
+          {
+            "idx": 42,
+            "cls": "peer"
+          },
+          {
+            "idx": 44,
+            "cls": "peer"
+          },
+          {
+            "idx": 7,
+            "cls": "peer"
+          },
+          {
+            "idx": 16,
+            "cls": "peer"
+          },
+          {
+            "idx": 25,
+            "cls": "peer"
+          },
+          {
+            "idx": 34,
+            "cls": "peer"
+          },
+          {
+            "idx": 52,
+            "cls": "peer"
+          },
+          {
+            "idx": 61,
+            "cls": "peer"
+          },
+          {
+            "idx": 70,
+            "cls": "peer"
+          },
+          {
+            "idx": 79,
+            "cls": "peer"
+          },
+          {
+            "idx": 33,
+            "cls": "peer"
+          },
+          {
+            "idx": 35,
+            "cls": "peer"
+          },
+          {
+            "idx": 51,
+            "cls": "peer"
+          },
+          {
+            "idx": 53,
+            "cls": "peer"
+          },
+          {
+            "idx": 43,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "r5c8 = 7: era o único candidato que sobrava nesta célula (os outros 8 dígitos já aparecem na linha, coluna ou bloco dela).",
+        "cells": [
+          {
+            "idx": 36,
+            "cls": "peer"
+          },
+          {
+            "idx": 37,
+            "cls": "peer"
+          },
+          {
+            "idx": 38,
+            "cls": "peer"
+          },
+          {
+            "idx": 39,
+            "cls": "peer"
+          },
+          {
+            "idx": 40,
+            "cls": "peer"
+          },
+          {
+            "idx": 41,
+            "cls": "peer"
+          },
+          {
+            "idx": 42,
+            "cls": "peer"
+          },
+          {
+            "idx": 44,
+            "cls": "peer"
+          },
+          {
+            "idx": 7,
+            "cls": "peer"
+          },
+          {
+            "idx": 16,
+            "cls": "peer"
+          },
+          {
+            "idx": 25,
+            "cls": "peer"
+          },
+          {
+            "idx": 34,
+            "cls": "peer"
+          },
+          {
+            "idx": 52,
+            "cls": "peer"
+          },
+          {
+            "idx": 61,
+            "cls": "peer"
+          },
+          {
+            "idx": 70,
+            "cls": "peer"
+          },
+          {
+            "idx": 79,
+            "cls": "peer"
+          },
+          {
+            "idx": 33,
+            "cls": "peer"
+          },
+          {
+            "idx": 35,
+            "cls": "peer"
+          },
+          {
+            "idx": 51,
+            "cls": "peer"
+          },
+          {
+            "idx": 53,
+            "cls": "peer"
+          },
+          {
+            "idx": 43,
+            "cls": "place",
+            "d": 7
+          }
+        ]
+      }
+    ]
+  },
+  "hidden-single": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Nesta unidade, veja onde este dígito ainda pode entrar.",
+        "cells": [
+          {
+            "idx": 54,
+            "cls": "peer"
+          },
+          {
+            "idx": 55,
+            "cls": "peer"
+          },
+          {
+            "idx": 56,
+            "cls": "peer"
+          },
+          {
+            "idx": 57,
+            "cls": "peer"
+          },
+          {
+            "idx": 58,
+            "cls": "peer"
+          },
+          {
+            "idx": 59,
+            "cls": "peer"
+          },
+          {
+            "idx": 60,
+            "cls": "peer"
+          },
+          {
+            "idx": 61,
+            "cls": "hl"
+          },
+          {
+            "idx": 62,
+            "cls": "peer"
+          }
+        ]
+      },
+      {
+        "caption": "r7c8 = 6: na linha 7, esta é a única célula que ainda aceita o 6.",
+        "cells": [
+          {
+            "idx": 54,
+            "cls": "peer"
+          },
+          {
+            "idx": 55,
+            "cls": "peer"
+          },
+          {
+            "idx": 56,
+            "cls": "peer"
+          },
+          {
+            "idx": 57,
+            "cls": "peer"
+          },
+          {
+            "idx": 58,
+            "cls": "peer"
+          },
+          {
+            "idx": 59,
+            "cls": "peer"
+          },
+          {
+            "idx": 60,
+            "cls": "peer"
+          },
+          {
+            "idx": 61,
+            "cls": "place",
+            "d": 6
+          },
+          {
+            "idx": 62,
+            "cls": "peer"
+          }
+        ]
+      }
+    ]
+  },
+  "naked-pair": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Estas células compartilham só dois candidatos entre si.",
+        "cells": [
+          {
+            "idx": 56,
+            "cls": "hl"
+          },
+          {
+            "idx": 65,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Na coluna 3, as células r7c3, r8c3 só aceitam 3/4 entre si → esses dígitos não podem aparecer nas demais células da unidade. Removo: r2c3 (tira 3); r2c3 (tira 4); r5c3 (tira 3); r9c3 (tira 3); r9c3 (tira 4).",
+        "cells": [
+          {
+            "idx": 56,
+            "cls": "hl"
+          },
+          {
+            "idx": 65,
+            "cls": "hl"
+          },
+          {
+            "idx": 11,
+            "cls": "elim",
+            "d": 4
+          },
+          {
+            "idx": 38,
+            "cls": "elim",
+            "d": 3
+          },
+          {
+            "idx": 74,
+            "cls": "elim",
+            "d": 4
+          }
+        ]
+      }
+    ]
+  },
+  "naked-triple": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Estas três células compartilham só três candidatos entre si.",
+        "cells": [
+          {
+            "idx": 11,
+            "cls": "hl"
+          },
+          {
+            "idx": 56,
+            "cls": "hl"
+          },
+          {
+            "idx": 65,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Na coluna 3, as células r2c3, r7c3, r8c3 só aceitam 3/4/7 entre si → esses dígitos não podem aparecer nas demais células da unidade. Removo: r4c3 (tira 7); r5c3 (tira 3); r5c3 (tira 7); r9c3 (tira 3); r9c3 (tira 4).",
+        "cells": [
+          {
+            "idx": 11,
+            "cls": "hl"
+          },
+          {
+            "idx": 56,
+            "cls": "hl"
+          },
+          {
+            "idx": 65,
+            "cls": "hl"
+          },
+          {
+            "idx": 29,
+            "cls": "elim",
+            "d": 7
+          },
+          {
+            "idx": 38,
+            "cls": "elim",
+            "d": 7
+          },
+          {
+            "idx": 74,
+            "cls": "elim",
+            "d": 4
+          }
+        ]
+      }
+    ]
+  },
+  "naked-quad": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Estas quatro células compartilham só quatro candidatos entre si.",
+        "cells": [
+          {
+            "idx": 56,
+            "cls": "hl"
+          },
+          {
+            "idx": 57,
+            "cls": "hl"
+          },
+          {
+            "idx": 58,
+            "cls": "hl"
+          },
+          {
+            "idx": 59,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Na linha 7, as células r7c3, r7c4, r7c5, r7c6 só aceitam 2/3/4/7 entre si → esses dígitos não podem aparecer nas demais células da unidade. Removo: r7c8 (tira 4); r7c8 (tira 2).",
+        "cells": [
+          {
+            "idx": 56,
+            "cls": "hl"
+          },
+          {
+            "idx": 57,
+            "cls": "hl"
+          },
+          {
+            "idx": 58,
+            "cls": "hl"
+          },
+          {
+            "idx": 59,
+            "cls": "hl"
+          },
+          {
+            "idx": 61,
+            "cls": "elim",
+            "d": 2
+          }
+        ]
+      }
+    ]
+  },
+  "hidden-pair": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Dois dígitos só cabem nestas duas células.",
+        "cells": [
+          {
+            "idx": 38,
+            "cls": "hl"
+          },
+          {
+            "idx": 29,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Na coluna 3, os dígitos 1/8 só cabem nas células r4c3, r5c3 → essas células ficam restritas a 1/8. Removo: r5c3 (tira 3); r5c3 (tira 5); r5c3 (tira 7); r4c3 (tira 5); r4c3 (tira 7).",
+        "cells": [
+          {
+            "idx": 38,
+            "cls": "elim",
+            "d": 7
+          },
+          {
+            "idx": 29,
+            "cls": "elim",
+            "d": 7
+          }
+        ]
+      }
+    ]
+  },
+  "hidden-triple": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Três dígitos só cabem nestas três células.",
+        "cells": [
+          {
+            "idx": 38,
+            "cls": "hl"
+          },
+          {
+            "idx": 29,
+            "cls": "hl"
+          },
+          {
+            "idx": 74,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Na coluna 3, os dígitos 1/5/8 só cabem nas células r4c3, r5c3, r9c3 → essas células ficam restritas a 1/5/8. Removo: r5c3 (tira 3); r5c3 (tira 7); r4c3 (tira 7); r9c3 (tira 3); r9c3 (tira 4).",
+        "cells": [
+          {
+            "idx": 38,
+            "cls": "elim",
+            "d": 7
+          },
+          {
+            "idx": 29,
+            "cls": "elim",
+            "d": 7
+          },
+          {
+            "idx": 74,
+            "cls": "elim",
+            "d": 4
+          }
+        ]
+      }
+    ]
+  },
+  "hidden-quad": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Quatro dígitos só cabem nestas quatro células.",
+        "cells": [
+          {
+            "idx": 38,
+            "cls": "hl"
+          },
+          {
+            "idx": 29,
+            "cls": "hl"
+          },
+          {
+            "idx": 74,
+            "cls": "hl"
+          },
+          {
+            "idx": 11,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Na coluna 3, os dígitos 1/5/7/8 só cabem nas células r2c3, r4c3, r5c3, r9c3 → essas células ficam restritas a 1/5/7/8. Removo: r5c3 (tira 3); r9c3 (tira 3); r9c3 (tira 4); r2c3 (tira 3); r2c3 (tira 4).",
+        "cells": [
+          {
+            "idx": 38,
+            "cls": "elim",
+            "d": 3
+          },
+          {
+            "idx": 29,
+            "cls": "hl"
+          },
+          {
+            "idx": 74,
+            "cls": "elim",
+            "d": 4
+          },
+          {
+            "idx": 11,
+            "cls": "elim",
+            "d": 4
+          }
+        ]
+      }
+    ]
+  },
+  "pointing": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Dentro do bloco, este dígito está preso a uma linha ou coluna.",
+        "cells": [
+          {
+            "idx": 66,
+            "cls": "hl"
+          },
+          {
+            "idx": 75,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "No bloco 8, o 1 só pode ficar na coluna 4 (células r8c4, r9c4) → removo o 1 das outras células dessa coluna 4: r5c4, r6c4.",
+        "cells": [
+          {
+            "idx": 66,
+            "cls": "hl"
+          },
+          {
+            "idx": 75,
+            "cls": "hl"
+          },
+          {
+            "idx": 39,
+            "cls": "elim",
+            "d": 1
+          },
+          {
+            "idx": 48,
+            "cls": "elim",
+            "d": 1
+          }
+        ]
+      }
+    ]
+  },
+  "claiming": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Na linha ou coluna, este dígito está preso a um único bloco.",
+        "cells": [
+          {
+            "idx": 21,
+            "cls": "hl"
+          },
+          {
+            "idx": 22,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Na linha 3, o 8 só pode ficar dentro do bloco 2 (células r3c4, r3c5) → removo o 8 das outras células do bloco: r1c4, r1c5.",
+        "cells": [
+          {
+            "idx": 21,
+            "cls": "hl"
+          },
+          {
+            "idx": 22,
+            "cls": "hl"
+          },
+          {
+            "idx": 3,
+            "cls": "elim",
+            "d": 8
+          },
+          {
+            "idx": 4,
+            "cls": "elim",
+            "d": 8
+          }
+        ]
+      }
+    ]
+  },
+  "x-wing": {
+    "grid": "500000821000015040700000000000003007082400600060002000600021500009040010000007000",
+    "frames": [
+      {
+        "caption": "Um dígito forma um retângulo em duas linhas e duas colunas.",
+        "cells": [
+          {
+            "idx": 30,
+            "cls": "hl"
+          },
+          {
+            "idx": 48,
+            "cls": "hl"
+          },
+          {
+            "idx": 33,
+            "cls": "hl"
+          },
+          {
+            "idx": 51,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "X-Wing no dígito 1: nas colunas 4 e 7 o 1 só aparece nas linhas 4 e 6 → removo o 1 dessas linhas nas demais colunas: r4c1, r4c2, r4c3, r6c1, r6c3.",
+        "cells": [
+          {
+            "idx": 30,
+            "cls": "hl"
+          },
+          {
+            "idx": 48,
+            "cls": "hl"
+          },
+          {
+            "idx": 33,
+            "cls": "hl"
+          },
+          {
+            "idx": 51,
+            "cls": "hl"
+          },
+          {
+            "idx": 27,
+            "cls": "elim",
+            "d": 1
+          },
+          {
+            "idx": 45,
+            "cls": "elim",
+            "d": 1
+          },
+          {
+            "idx": 28,
+            "cls": "elim",
+            "d": 1
+          },
+          {
+            "idx": 29,
+            "cls": "elim",
+            "d": 1
+          },
+          {
+            "idx": 47,
+            "cls": "elim",
+            "d": 1
+          }
+        ]
+      }
+    ]
+  },
+  "swordfish": {
+    "grid": "002000000100200008056001200000300100040000000009008034810000905700050000000060700",
+    "frames": [
+      {
+        "caption": "Versão 3×3 do X-Wing: o dígito fica preso a 3 linhas e 3 colunas.",
+        "cells": [
+          {
+            "idx": 7,
+            "cls": "hl"
+          },
+          {
+            "idx": 8,
+            "cls": "hl"
+          },
+          {
+            "idx": 66,
+            "cls": "hl"
+          },
+          {
+            "idx": 70,
+            "cls": "hl"
+          },
+          {
+            "idx": 71,
+            "cls": "hl"
+          },
+          {
+            "idx": 75,
+            "cls": "hl"
+          },
+          {
+            "idx": 79,
+            "cls": "hl"
+          },
+          {
+            "idx": 80,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Swordfish no dígito 1: em 3 linhas o 1 só aparece nas mesmas 3 colunas → removo o 1 dessas colunas nas demais linhas: r5c4, r6c4.",
+        "cells": [
+          {
+            "idx": 7,
+            "cls": "hl"
+          },
+          {
+            "idx": 8,
+            "cls": "hl"
+          },
+          {
+            "idx": 66,
+            "cls": "hl"
+          },
+          {
+            "idx": 70,
+            "cls": "hl"
+          },
+          {
+            "idx": 71,
+            "cls": "hl"
+          },
+          {
+            "idx": 75,
+            "cls": "hl"
+          },
+          {
+            "idx": 79,
+            "cls": "hl"
+          },
+          {
+            "idx": 80,
+            "cls": "hl"
+          },
+          {
+            "idx": 39,
+            "cls": "elim",
+            "d": 1
+          },
+          {
+            "idx": 48,
+            "cls": "elim",
+            "d": 1
+          }
+        ]
+      }
+    ]
+  },
+  "y-wing": {
+    "grid": "600008071278010000003079000000000050000080000810620004000097005002000000360000090",
+    "frames": [
+      {
+        "caption": "Um pivô e duas pontas (cada uma com 2 candidatos) forçam uma eliminação.",
+        "cells": [
+          {
+            "idx": 31,
+            "cls": "hl"
+          },
+          {
+            "idx": 50,
+            "cls": "hl"
+          },
+          {
+            "idx": 76,
+            "cls": "hl"
+          }
+        ]
+      },
+      {
+        "caption": "Y-Wing: o pivô r4c5 (3/4) vê as pontas r6c6 e r9c5; uma delas será 5 → removo o 5 de r8c6, r9c6.",
+        "cells": [
+          {
+            "idx": 31,
+            "cls": "hl"
+          },
+          {
+            "idx": 50,
+            "cls": "hl"
+          },
+          {
+            "idx": 76,
+            "cls": "hl"
+          },
+          {
+            "idx": 68,
+            "cls": "elim",
+            "d": 5
+          },
+          {
+            "idx": 77,
+            "cls": "elim",
+            "d": 5
+          }
+        ]
+      }
+    ]
+  }
+}
