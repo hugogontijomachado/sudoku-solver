@@ -1,0 +1,3 @@
+- Tem um bug que, por exemplo, quando digito apenas 1 numero em um sudoku limpo, a tela fica preta, o que acontece? o numero de possibilidades e muito grande e o app se perde na procura? o que podemos fazer pra melhorar esse comportamento? focado em ui/ux design
+
+- precisamos de uma pagina ou aba para uma pagina em html mesmo sobre as 25 tecnicas,
