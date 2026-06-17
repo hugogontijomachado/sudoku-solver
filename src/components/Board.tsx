@@ -13,9 +13,10 @@ type Props = {
   selected: Coord | null;
   setSelected: (c: Coord | null) => void;
   setCell: (r: number, c: number, v: number) => void;
+  celebrate?: boolean;
 };
 
-export function Board({ mode, editGrid, givens, view, conflicts, selected, setSelected, setCell }: Props) {
+export function Board({ mode, editGrid, givens, view, conflicts, selected, setSelected, setCell, celebrate }: Props) {
   const conflictSet = new Set(conflicts.map((c) => c.r * 9 + c.c));
   const highlightSet = new Set((view?.highlight ?? []).map((c) => c.r * 9 + c.c));
   const currentSet = new Set((view?.current ?? []).map((c) => c.r * 9 + c.c));
@@ -65,7 +66,7 @@ export function Board({ mode, editGrid, givens, view, conflicts, selected, setSe
     }
 
   return (
-    <div className="board" tabIndex={0} onKeyDown={onKeyDown}>
+    <div className={`board${celebrate ? ' celebrate' : ''}`} tabIndex={0} onKeyDown={onKeyDown}>
       {cells}
     </div>
   );

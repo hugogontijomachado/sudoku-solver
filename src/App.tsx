@@ -6,6 +6,7 @@ import type { SolveResult } from './solver/solve';
 import { Board } from './components/Board';
 import { Toolbar } from './components/Toolbar';
 import { NumberPad } from './components/NumberPad';
+import { Celebration, CELEBRATION } from './components/Celebration';
 import { StepPlayer } from './components/StepPlayer';
 import { ProtocolView } from './components/ProtocolView';
 import { useMediaQuery, useElementHeight } from './hooks/layout';
@@ -26,6 +27,7 @@ export default function App() {
   const [showProtocol, setShowProtocol] = useState(false);
   const isDesktop = useMediaQuery('(min-width: 881px)');
   const [boardCardRef, boardCardH] = useElementHeight<HTMLDivElement>();
+  const celebrate = mode === 'solved' && !!result && stepIndex === result.steps.length - 1;
 
   const conflicts = useMemo(() => (mode === 'edit' ? findConflicts(cells) : []), [cells, mode]);
   const filledCount = useMemo(() => cells.flat().filter((v) => v).length, [cells]);
@@ -104,7 +106,7 @@ export default function App() {
       </div>
 
       <div className="grid2">
-        <div className="card" ref={boardCardRef}>
+        <div className="card board-card" ref={boardCardRef}>
           <Board
             mode={mode}
             editGrid={cells}
@@ -114,6 +116,7 @@ export default function App() {
             selected={selected}
             setSelected={setSelected}
             setCell={setCell}
+            celebrate={CELEBRATION.boardGlow && celebrate}
           />
           {mode === 'edit' && (
             <NumberPad
@@ -127,6 +130,7 @@ export default function App() {
             <span><i className="sw-filled" />preenchido pelo solver</span>
             <span><i className="sw-cur" />passo atual</span>
           </div>
+          <Celebration active={celebrate} />
         </div>
 
         <div>
