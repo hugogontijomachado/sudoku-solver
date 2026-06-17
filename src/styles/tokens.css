@@ -54,7 +54,9 @@ body {
 .banner.error { background: var(--banner-error-bg); color: var(--error); border: 1px solid var(--error); }
 .banner.warn { background: var(--banner-warn-bg); color: var(--warning); border: 1px solid var(--warning); }
 
-.step { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; }
+.step { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; }
+.step .meta, .step .progress, .step .nav-steps, .step .more { flex-shrink: 0; }
+.step .text { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
 .step .meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .step .count { font-family: 'JetBrains Mono', monospace; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
 .pill { background: var(--primary); color: var(--on-primary); font-size: 12px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 12px; border-radius: 9999px; }

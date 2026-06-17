@@ -8,6 +8,7 @@ import { Toolbar } from './components/Toolbar';
 import { NumberPad } from './components/NumberPad';
 import { StepPlayer } from './components/StepPlayer';
 import { ProtocolView } from './components/ProtocolView';
+import { useMediaQuery, useElementHeight } from './hooks/layout';
 
 const EXAMPLE = [
   '...5...6.', '8.9....1.', '16..87...', '3...26...', '..7.1.6..',
@@ -23,6 +24,8 @@ export default function App() {
   const [selected, setSelected] = useState<Coord | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showProtocol, setShowProtocol] = useState(false);
+  const isDesktop = useMediaQuery('(min-width: 881px)');
+  const [boardCardRef, boardCardH] = useElementHeight<HTMLDivElement>();
 
   const conflicts = useMemo(() => (mode === 'edit' ? findConflicts(cells) : []), [cells, mode]);
   const filledCount = useMemo(() => cells.flat().filter((v) => v).length, [cells]);
@@ -101,7 +104,7 @@ export default function App() {
       </div>
 
       <div className="grid2">
-        <div className="card">
+        <div className="card" ref={boardCardRef}>
           <Board
             mode={mode}
             editGrid={cells}
@@ -155,6 +158,7 @@ export default function App() {
                 index={stepIndex}
                 setIndex={setStepIndex}
                 onShowProtocol={() => setShowProtocol(true)}
+                cardHeight={isDesktop ? boardCardH : undefined}
               />
               <div className="card status">
                 <div className="mlabel">Status</div>

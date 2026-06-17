@@ -6,9 +6,10 @@ type Props = {
   index: number;
   setIndex: (i: number) => void;
   onShowProtocol: () => void;
+  cardHeight?: number;
 };
 
-export function StepPlayer({ steps, index, setIndex, onShowProtocol }: Props) {
+export function StepPlayer({ steps, index, setIndex, onShowProtocol, cardHeight }: Props) {
   const [auto, setAuto] = useState(false);
   const total = steps.length;
   const step = steps[index];
@@ -26,7 +27,7 @@ export function StepPlayer({ steps, index, setIndex, onShowProtocol }: Props) {
   }, [auto, index, total, setIndex]);
 
   return (
-    <div className="step">
+    <div className="step" style={cardHeight ? { height: cardHeight } : undefined}>
       <div className="meta">
         <span className="count">PASSO {String(index + 1).padStart(2, '0')} / {total}</span>
         <span className="pill">{step.technique}</span>
