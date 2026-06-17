@@ -3,8 +3,8 @@
 # Builds the app, serves the production build, drives Chrome via the DevTools
 # Protocol (no extra npm deps), runs the smoke suites, and cleans up.
 #
-# Usage: bash scripts/smoke/run.sh            # runs smoke2 + smoke3 + smoke4
-#        bash scripts/smoke/run.sh smoke4     # run a single suite
+# Usage: bash scripts/smoke/run.sh            # runs smoke2 + smoke3 + smoke4 + smoke5
+#        bash scripts/smoke/run.sh smoke5     # run a single suite
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -13,7 +13,7 @@ PORT="${PORT:-4188}"
 CDP_PORT="${CDP_PORT:-9230}"
 PROFILE="$(mktemp -d)"
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
-SUITES=("${@:-smoke2 smoke3 smoke4}")
+SUITES=("${@:-smoke2 smoke3 smoke4 smoke5}")
 
 if [ ! -x "$CHROME" ]; then
   echo "Chrome not found at: $CHROME (override with CHROME=/path/to/chrome)"; exit 1

@@ -175,7 +175,7 @@ export default function App() {
         <div className="brand"><span className="dot" />Sudoku Solver <span className="badge">9×9</span></div>
         <div className="tabs">
           <button className={'tab' + (tab === 'solver' ? ' active' : '')} onClick={() => setTab('solver')}>
-            Resolver
+            Resolvedor
           </button>
           <button className={'tab' + (tab === 'tecnicas' ? ' active' : '')} onClick={() => setTab('tecnicas')}>
             Técnicas
