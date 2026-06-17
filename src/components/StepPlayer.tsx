@@ -14,6 +14,7 @@ export function StepPlayer({ steps, index, setIndex, onShowProtocol }: Props) {
   const step = steps[index];
   const pct = Math.round(((index + 1) / total) * 100);
 
+  // Note: `setIndex` must be a stable reference (parent passes the state setter) or the timer would reset each render.
   useEffect(() => {
     if (!auto) return;
     if (index >= total - 1) {

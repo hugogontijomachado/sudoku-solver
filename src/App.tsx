@@ -65,6 +65,7 @@ export default function App() {
     setResult(null);
     setMode('edit');
     setError(null);
+    setSelected(null);
   }
 
   function handleEdit() {

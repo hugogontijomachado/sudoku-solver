@@ -4,6 +4,7 @@
   --ink: #ffffff; --body: #cccccc; --muted: #888888; --muted-soft: #5a5a5a;
   --hairline: #2a2a2a; --hairline-strong: #3a3a3a; --on-primary: #0a0a0a;
   --error: #ef4444; --warning: #f59e0b;
+  --surface-peer: #23230f; --banner-error-bg: #2a1414; --banner-warn-bg: #2a2310;
 }
 * { box-sizing: border-box; }
 body {
@@ -32,7 +33,7 @@ body {
 .cell.given { color: var(--ink); font-weight: 700; }
 .cell.filled { color: var(--body); font-weight: 500; }
 .cell.cur { background: var(--primary); color: var(--on-primary); font-weight: 700; }
-.cell.peer { background: #23230f; }
+.cell.peer { background: var(--surface-peer); }
 .cell.selected { box-shadow: inset 0 0 0 2px var(--primary); }
 .cell.conflict { color: var(--error); }
 .cell:nth-child(9n+4), .cell:nth-child(9n+7) { border-left: 2px solid var(--hairline-strong); }
@@ -40,7 +41,7 @@ body {
 
 .legend { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; color: var(--muted); font-size: 13px; }
 .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
-.sw-given { background: #fff; } .sw-filled { background: var(--body); } .sw-cur { background: var(--primary); }
+.sw-given { background: var(--ink); } .sw-filled { background: var(--body); } .sw-cur { background: var(--primary); }
 
 .toolbar { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
 .btn { height: 40px; padding: 0 20px; border-radius: 8px; border: 0; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
@@ -50,8 +51,8 @@ body {
 .btn-ghost { background: transparent; color: var(--body); border: 1px solid var(--hairline-strong); }
 
 .banner { border-radius: 8px; padding: 12px 16px; font-size: 14px; margin-bottom: 14px; }
-.banner.error { background: #2a1414; color: var(--error); border: 1px solid var(--error); }
-.banner.warn { background: #2a2310; color: var(--warning); border: 1px solid var(--warning); }
+.banner.error { background: var(--banner-error-bg); color: var(--error); border: 1px solid var(--error); }
+.banner.warn { background: var(--banner-warn-bg); color: var(--warning); border: 1px solid var(--warning); }
 
 .step { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; }
 .step .meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
