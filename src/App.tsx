@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { emptyGrid, cloneGrid, parseGrid, findConflicts } from './solver/grid';
 import type { Grid, Coord } from './solver/grid';
-import { solve, hasSolution } from './solver/solve';
+import { solve, countSolutions } from './solver/solve';
 import type { SolveResult } from './solver/solve';
 import { Board } from './components/Board';
 import { Toolbar } from './components/Toolbar';
@@ -34,11 +34,13 @@ export default function App() {
 
   const conflicts = useMemo(() => (mode === 'edit' ? findConflicts(cells) : []), [cells, mode]);
   const filledCount = useMemo(() => cells.flat().filter((v) => v).length, [cells]);
-  const solvable = useMemo(
-    () => (conflicts.length === 0 && filledCount > 0 ? hasSolution(cells) : true),
-    [cells, conflicts.length, filledCount],
-  );
-  const canSolve = conflicts.length === 0 && filledCount > 0 && solvable;
+  const validity = useMemo(() => {
+    if (conflicts.length || filledCount === 0) return { solvable: true, unique: false };
+    const { count } = countSolutions(cells, 2);
+    return { solvable: count >= 1, unique: count === 1 };
+  }, [cells, conflicts.length, filledCount]);
+  const canSolve = conflicts.length === 0 && filledCount > 0 && validity.solvable;
+  const canCheck = conflicts.length === 0 && filledCount > 0 && validity.unique;
 
   function setCell(r: number, c: number, v: number) {
     setCells((g) => {
@@ -148,7 +150,7 @@ export default function App() {
           <Toolbar
             mode={mode}
             canSolve={canSolve}
-            canCheck={false}
+            canCheck={canCheck}
             loading={loading}
             onSolve={handleSolve}
             onCheck={() => {}}
@@ -159,7 +161,7 @@ export default function App() {
 
           {error && <div className="banner error">{error}</div>}
 
-          {mode === 'edit' && !solvable && (
+          {mode === 'edit' && !validity.solvable && (
             <div className="banner error">Este Sudoku não tem solução. Revise as pistas.</div>
           )}
 
