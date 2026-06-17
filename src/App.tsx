@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, lazy, Suspense } from 'react';
 import { emptyGrid, cloneGrid, parseGrid, findConflicts } from './solver/grid';
 import type { Grid, Coord } from './solver/grid';
 import { solve, countSolutions, fillRandomValidCell } from './solver/solve';
@@ -15,12 +15,15 @@ import { playStatus } from './solver/play';
 import { loadRandomPuzzle } from './data/loadPuzzles';
 import type { Difficulty } from './data/loadPuzzles';
 
+const TechniquesPage = lazy(() => import('./components/TechniquesPage'));
+
 const EXAMPLE = [
   '...5...6.', '8.9....1.', '16..87...', '3...26...', '..7.1.6..',
   '...85...3', '...47..21', '.4....9.8', '.8...3...',
 ].join('\n');
 
 export default function App() {
+  const [tab, setTab] = useState<'solver' | 'tecnicas'>('solver');
   const [cells, setCells] = useState<Grid>(() => parseGrid(EXAMPLE));
   const [mode, setMode] = useState<'edit' | 'solved' | 'play'>('edit');
   const [result, setResult] = useState<SolveResult | null>(null);
@@ -170,9 +173,22 @@ export default function App() {
     <div className="wrap">
       <div className="nav">
         <div className="brand"><span className="dot" />Sudoku Solver <span className="badge">9×9</span></div>
-        <div className="muted">resolve + explica passo a passo</div>
+        <div className="tabs">
+          <button className={'tab' + (tab === 'solver' ? ' active' : '')} onClick={() => setTab('solver')}>
+            Resolver
+          </button>
+          <button className={'tab' + (tab === 'tecnicas' ? ' active' : '')} onClick={() => setTab('tecnicas')}>
+            Técnicas
+          </button>
+        </div>
       </div>
 
+      {tab === 'tecnicas' ? (
+        <Suspense fallback={<div className="muted" style={{ padding: 40 }}>Carregando…</div>}>
+          <TechniquesPage />
+        </Suspense>
+      ) : (
+      <>
       <div className="head">
         <h1>Resolva e entenda, passo a passo</h1>
         <p>Preencha as pistas, clique em Resolver e acompanhe cada dedução destacada na grade — ou baixe a explicação completa em PDF.</p>
@@ -284,6 +300,8 @@ export default function App() {
           )}
         </div>
       </div>
+      </>
+      )}
 
       {showProtocol && result && (
         <ProtocolView result={result} givens={givens} onClose={() => setShowProtocol(false)} />

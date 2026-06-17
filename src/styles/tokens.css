@@ -194,3 +194,65 @@ body {
   border-left: 2px solid var(--hairline-strong); padding-left: 12px;
 }
 .mb-cap-idle { color: var(--muted-soft); }
+
+/* Nav tabs */
+.tabs { display: flex; gap: 6px; }
+.tab {
+  font-family: inherit; font-size: 14px; font-weight: 600; color: var(--muted);
+  background: transparent; border: 1px solid transparent; padding: 8px 16px;
+  border-radius: 8px; cursor: pointer;
+}
+.tab:hover { color: var(--ink); background: var(--surface-soft); }
+.tab.active { color: var(--on-primary); background: var(--primary); }
+
+/* Técnicas page */
+.tecnicas { padding-bottom: 56px; }
+.tecnicas .sp { flex: 1; }
+.tecnicas .concepts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 8px; }
+.tecnicas .concept { background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: 10px; padding: 12px 14px; }
+.tecnicas .concept b { font-size: 13px; }
+.tecnicas .concept p { margin: 4px 0 0; font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+.filterbar {
+  position: sticky; top: 0; z-index: 5; display: flex; gap: 8px; align-items: center;
+  flex-wrap: wrap; padding: 12px 0; margin: 14px 0 6px;
+  background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--hairline);
+}
+.chip {
+  font-family: inherit; font-size: 12px; font-weight: 700; padding: 6px 13px; border-radius: 9999px;
+  background: var(--surface-elevated); color: var(--body); border: 1px solid var(--hairline-strong); cursor: pointer;
+}
+.chip:hover { color: var(--ink); }
+.chip.on { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.filterbar .count { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+.levelhead {
+  font-size: 13px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--primary); margin: 26px 0 12px; display: flex; align-items: center; gap: 10px;
+}
+.levelhead .ln { color: var(--muted); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+.tgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.tcard {
+  background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px;
+  padding: 16px; display: flex; flex-direction: column; gap: 12px;
+}
+.tcard .thead { display: flex; align-items: flex-start; gap: 10px; }
+.tnum {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--on-primary);
+  background: var(--primary); font-weight: 800; border-radius: 7px; min-width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center; padding: 0 4px; flex-shrink: 0;
+}
+.tcard.no .tnum { background: var(--surface-elevated); color: var(--muted); }
+.tpt { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+.ten { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+.tbadge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 9999px; letter-spacing: 0.4px; white-space: nowrap; }
+.tbadge.impl { background: #10260f; color: var(--success); }
+.tbadge.no { background: var(--surface-elevated); color: var(--muted); }
+.ttext { font-size: 13.5px; color: var(--body); line-height: 1.55; margin: 0; }
+
+@media (max-width: 760px) {
+  .tecnicas .concepts { grid-template-columns: repeat(2, 1fr); }
+  .tgrid { grid-template-columns: 1fr; }
+}
