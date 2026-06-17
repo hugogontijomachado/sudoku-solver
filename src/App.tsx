@@ -137,6 +137,14 @@ export default function App() {
 
   const view = useMemo(() => {
     if (mode !== 'solved' || !result) return null;
+    // A grid solved purely by backtracking has no steps; show the completed solution
+    // instead of indexing an empty array (the old crash path).
+    if (result.steps.length === 0)
+      return {
+        grid: cloneGrid(result.solution),
+        highlight: [] as Coord[],
+        current: [] as { r: number; c: number; d: number }[],
+      };
     const g = cloneGrid(givens);
     for (let i = 0; i <= stepIndex && i < result.steps.length; i++)
       for (const p of result.steps[i].placements ?? []) g[p.r][p.c] = p.d;
@@ -216,21 +224,30 @@ export default function App() {
               {result.usedBacktracking && (
                 <div className="banner warn">A lógica implementada não bastou; o restante foi completado por tentativa e erro.</div>
               )}
-              <StepPlayer
-                steps={result.steps}
-                index={stepIndex}
-                setIndex={setStepIndex}
-                onShowProtocol={() => setShowProtocol(true)}
-                cardHeight={isDesktop ? boardCardH : undefined}
-              />
-              <div className="card status">
-                <div className="mlabel">Status</div>
-                <div>
-                  Solução {result.unique ? <b style={{ color: 'var(--primary)' }}>única</b> : 'múltipla'} ·{' '}
-                  {result.usedBacktracking ? 'parte por tentativa e erro' : 'resolvido só com lógica'} ·{' '}
-                  {new Set(result.steps.map((s) => s.technique)).size} técnicas usadas.
+              {result.steps.length > 0 ? (
+                <>
+                  <StepPlayer
+                    steps={result.steps}
+                    index={stepIndex}
+                    setIndex={setStepIndex}
+                    onShowProtocol={() => setShowProtocol(true)}
+                    cardHeight={isDesktop ? boardCardH : undefined}
+                  />
+                  <div className="card status">
+                    <div className="mlabel">Status</div>
+                    <div>
+                      Solução {result.unique ? <b style={{ color: 'var(--primary)' }}>única</b> : 'múltipla'} ·{' '}
+                      {result.usedBacktracking ? 'parte por tentativa e erro' : 'resolvido só com lógica'} ·{' '}
+                      {new Set(result.steps.map((s) => s.technique)).size} técnicas usadas.
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="card hint">
+                  <div className="mlabel">Resolvido</div>
+                  <div>Completado por tentativa e erro — não há deduções lógicas a exibir para este tabuleiro (poucas pistas).</div>
                 </div>
-              </div>
+              )}
             </>
           )}
 

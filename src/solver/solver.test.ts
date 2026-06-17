@@ -69,6 +69,16 @@ describe('solve — edge cases', () => {
     const res = solve(parseGrid('.'.repeat(81)));
     expect(res.unique).toBe(false);
   });
+
+  // The UI must survive this: a too-sparse grid has no logical deduction, so solve()
+  // falls straight to backtracking and returns ZERO steps. Indexing steps[0] used to
+  // crash the render (the "tela preta"). This locks the precondition the guards handle.
+  it('returns zero steps for a 1-clue grid (pure backtracking)', () => {
+    const res = solve(parseGrid('5' + '.'.repeat(80)));
+    expect(res.steps.length).toBe(0);
+    expect(res.usedBacktracking).toBe(true);
+    expect(res.solved).toBe(true);
+  });
 });
 
 describe('fillRandomValidCell', () => {
@@ -86,13 +96,15 @@ describe('fillRandomValidCell', () => {
   });
 
   it('reduces the number of solutions toward uniqueness as cells are added', () => {
+    // deterministic LCG so the test never flakes
+    let seed = 12345;
+    const rng = () => ((seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
     let g = parseGrid('472531869' + '.'.repeat(72)); // one full row of givens -> still non-unique
     expect(countSolutions(g, 2).count).toBe(2);
-    for (let i = 0; i < 40; i++) {
-      const next = fillRandomValidCell(g, Math.random);
+    for (let i = 0; i < 81 && countSolutions(g, 2).count > 1; i++) {
+      const next = fillRandomValidCell(g, rng);
       if (!next) break;
       g = next;
-      if (countSolutions(g, 2).count === 1) break;
     }
     expect(countSolutions(g, 2).count).toBe(1);
   });

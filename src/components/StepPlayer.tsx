@@ -26,6 +26,10 @@ export function StepPlayer({ steps, index, setIndex, onShowProtocol, cardHeight 
     return () => clearTimeout(id);
   }, [auto, index, total, setIndex]);
 
+  // A grid solved purely by backtracking yields zero steps; render nothing rather than
+  // dereferencing steps[index] (which used to crash the whole app — the "tela preta").
+  if (total === 0) return null;
+
   return (
     <div className="step" style={cardHeight ? { height: cardHeight } : undefined}>
       <div className="meta">
