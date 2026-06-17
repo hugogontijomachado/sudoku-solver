@@ -139,7 +139,15 @@ body {
 .numpad-hint { margin-top: 10px; color: var(--muted); font-size: 13px; text-align: center; }
 
 .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow: auto; z-index: 10; }
-.protocol { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; padding: 32px; max-width: 760px; width: 100%; }
+.protocol { position: relative; background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; padding: 32px; max-width: 760px; width: 100%; }
+.modal-close {
+  position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface-elevated); color: var(--body);
+  border: 1px solid var(--hairline-strong); border-radius: 8px;
+  font-size: 16px; cursor: pointer;
+}
+.modal-close:hover { color: var(--ink); background: var(--surface-card); }
 .protocol h2 { margin: 0 0 16px; font-size: 24px; }
 .protocol pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--body); background: var(--canvas); padding: 16px; border-radius: 8px; overflow: auto; }
 .protocol ol { padding-left: 20px; }

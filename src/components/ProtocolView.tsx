@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { renderGridText } from '../solver/grid';
 import type { Grid } from '../solver/grid';
 import type { SolveResult } from '../solver/solve';
@@ -5,9 +6,16 @@ import type { SolveResult } from '../solver/solve';
 type Props = { result: SolveResult; givens: Grid; onClose: () => void };
 
 export function ProtocolView({ result, givens, onClose }: Props) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="protocol" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose} aria-label="Fechar">✕</button>
         <h2>Protocolo de resolução</h2>
 
         <p className="mlabel">Tabuleiro inicial</p>
