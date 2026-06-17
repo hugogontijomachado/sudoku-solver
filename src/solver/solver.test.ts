@@ -37,6 +37,11 @@ describe('solve — reference puzzle', () => {
     expect(techs.has('Par escondido')).toBe(true);
   });
 
+  it('exercises elimination-only techniques, not just placements', () => {
+    const steps = solve(parseGrid(PUZZLE)).steps;
+    expect(steps.some((s) => (s.eliminations?.length ?? 0) > 0)).toBe(true);
+  });
+
   it('every unit in the solution is a permutation of 1..9', () => {
     const g = solve(parseGrid(PUZZLE)).solution;
     for (const u of UNITS) {
