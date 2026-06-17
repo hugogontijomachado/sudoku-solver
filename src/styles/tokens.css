@@ -44,6 +44,19 @@ body {
 .sw-given { background: var(--ink); } .sw-filled { background: var(--body); } .sw-cur { background: var(--primary); }
 
 .toolbar { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+.dropdown { position: relative; display: inline-block; }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 6px); left: 0; z-index: 20; min-width: 160px;
+  background: var(--surface-card); border: 1px solid var(--hairline-strong);
+  border-radius: 8px; padding: 6px; display: flex; flex-direction: column; gap: 2px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+.dropdown-item {
+  text-align: left; background: transparent; border: 0; color: var(--ink);
+  font-family: inherit; font-size: 14px; font-weight: 500; padding: 8px 12px;
+  border-radius: 6px; cursor: pointer;
+}
+.dropdown-item:hover { background: var(--surface-elevated); }
 .btn { height: 40px; padding: 0 20px; border-radius: 8px; border: 0; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-primary { background: var(--primary); color: var(--on-primary); }

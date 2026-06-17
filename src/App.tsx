@@ -10,6 +10,8 @@ import { Celebration, CELEBRATION } from './components/Celebration';
 import { StepPlayer } from './components/StepPlayer';
 import { ProtocolView } from './components/ProtocolView';
 import { useMediaQuery, useElementHeight } from './hooks/layout';
+import { loadRandomPuzzle } from './data/loadPuzzles';
+import type { Difficulty } from './data/loadPuzzles';
 
 const EXAMPLE = [
   '...5...6.', '8.9....1.', '16..87...', '3...26...', '..7.1.6..',
@@ -17,7 +19,7 @@ const EXAMPLE = [
 ].join('\n');
 
 export default function App() {
-  const [cells, setCells] = useState<Grid>(emptyGrid());
+  const [cells, setCells] = useState<Grid>(() => parseGrid(EXAMPLE));
   const [mode, setMode] = useState<'edit' | 'solved'>('edit');
   const [result, setResult] = useState<SolveResult | null>(null);
   const [givens, setGivens] = useState<Grid>(emptyGrid());
@@ -25,6 +27,7 @@ export default function App() {
   const [selected, setSelected] = useState<Coord | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showProtocol, setShowProtocol] = useState(false);
+  const [loading, setLoading] = useState(false);
   const isDesktop = useMediaQuery('(min-width: 881px)');
   const [boardCardRef, boardCardH] = useElementHeight<HTMLDivElement>();
   const celebrate = mode === 'solved' && !!result && stepIndex === result.steps.length - 1;
@@ -70,12 +73,20 @@ export default function App() {
     setSelected(null);
   }
 
-  function handleExample() {
-    setCells(parseGrid(EXAMPLE));
-    setResult(null);
-    setMode('edit');
-    setError(null);
-    setSelected(null);
+  async function handleRandom(d: Difficulty) {
+    setLoading(true);
+    try {
+      const puzzle = await loadRandomPuzzle(d);
+      setCells(parseGrid(puzzle));
+      setResult(null);
+      setMode('edit');
+      setError(null);
+      setSelected(null);
+    } catch {
+      setError('Não foi possível carregar um puzzle aleatório.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleEdit() {
@@ -137,10 +148,13 @@ export default function App() {
           <Toolbar
             mode={mode}
             canSolve={canSolve}
+            canCheck={false}
+            loading={loading}
             onSolve={handleSolve}
+            onCheck={() => {}}
             onClear={handleClear}
-            onExample={handleExample}
             onEdit={handleEdit}
+            onRandom={handleRandom}
           />
 
           {error && <div className="banner error">{error}</div>}
