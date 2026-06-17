@@ -42,7 +42,7 @@ export function StepPlayer({ steps, index, setIndex, onShowProtocol, cardHeight 
           Próximo ▶
         </button>
         <span className="spacer" />
-        <button className="btn btn-ghost" onClick={() => setAuto((a) => !a)}>
+        <button className="btn btn-ghost auto-toggle" onClick={() => setAuto((a) => !a)}>
           {auto ? '⏸ Pausar' : '⏯ Auto'}
         </button>
       </div>

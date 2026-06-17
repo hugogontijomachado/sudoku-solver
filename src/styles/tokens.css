@@ -24,7 +24,10 @@ body {
 .head p { color: var(--body); font-size: 16px; margin: 0; max-width: 640px; line-height: 1.55; }
 
 .grid2 { display: grid; grid-template-columns: minmax(0, 440px) 1fr; gap: 28px; align-items: start; padding-bottom: 48px; }
-@media (max-width: 880px) { .grid2 { grid-template-columns: 1fr; } }
+@media (max-width: 880px) {
+  .grid2 { grid-template-columns: minmax(0, 1fr); }
+  .step { min-height: 300px; }
+}
 
 .card { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; }
 
@@ -78,6 +81,7 @@ body {
 .progress > span { display: block; height: 100%; background: var(--primary); }
 .nav-steps { display: flex; gap: 10px; align-items: center; }
 .nav-steps .spacer { flex: 1; }
+.auto-toggle { min-width: 116px; justify-content: center; }
 .more { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid var(--hairline); }
 .more a { color: var(--primary); font-size: 15px; text-decoration: underline; cursor: pointer; }
 
