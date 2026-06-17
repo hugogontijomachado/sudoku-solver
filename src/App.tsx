@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { emptyGrid, cloneGrid, parseGrid, findConflicts } from './solver/grid';
 import type { Grid, Coord } from './solver/grid';
-import { solve, countSolutions } from './solver/solve';
+import { solve, countSolutions, fillRandomValidCell } from './solver/solve';
 import type { SolveResult } from './solver/solve';
 import { Board } from './components/Board';
 import { Toolbar } from './components/Toolbar';
@@ -9,6 +9,7 @@ import { NumberPad } from './components/NumberPad';
 import { Celebration, CELEBRATION } from './components/Celebration';
 import { StepPlayer } from './components/StepPlayer';
 import { ProtocolView } from './components/ProtocolView';
+import { MultipleSolutionsDialog } from './components/MultipleSolutionsDialog';
 import { useMediaQuery, useElementHeight } from './hooks/layout';
 import { playStatus } from './solver/play';
 import { loadRandomPuzzle } from './data/loadPuzzles';
@@ -30,6 +31,7 @@ export default function App() {
   const [selected, setSelected] = useState<Coord | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showProtocol, setShowProtocol] = useState(false);
+  const [showMulti, setShowMulti] = useState(false);
   const [loading, setLoading] = useState(false);
   const isDesktop = useMediaQuery('(min-width: 881px)');
   const [boardCardRef, boardCardH] = useElementHeight<HTMLDivElement>();
@@ -88,15 +90,27 @@ export default function App() {
       setError('Há dígitos repetidos numa linha, coluna ou bloco. Corrija os destaques em vermelho.');
       return;
     }
+    // Too few clues → more than one solution → no single deduction to teach. Don't solve
+    // (and don't crash); open the helper dialog instead.
+    if (!validity.unique) {
+      setShowMulti(true);
+      return;
+    }
     try {
       const res = solve(cells);
       setResult(res);
       setGivens(cloneGrid(cells));
       setStepIndex(0);
+      setShowMulti(false);
       setMode('solved');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Não foi possível resolver.');
     }
+  }
+
+  function handleFillOne() {
+    const next = fillRandomValidCell(cells);
+    if (next) setCells(next);
   }
 
   function handleClear() {
@@ -273,6 +287,18 @@ export default function App() {
 
       {showProtocol && result && (
         <ProtocolView result={result} givens={givens} onClose={() => setShowProtocol(false)} />
+      )}
+
+      {showMulti && (
+        <MultipleSolutionsDialog
+          unique={validity.unique}
+          onFill={handleFillOne}
+          onSolve={() => {
+            setShowMulti(false);
+            handleSolve();
+          }}
+          onClose={() => setShowMulti(false)}
+        />
       )}
     </div>
   );

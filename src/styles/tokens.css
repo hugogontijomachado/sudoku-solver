@@ -157,3 +157,7 @@ body {
 .protocol li { margin-bottom: 10px; line-height: 1.5; color: var(--body); }
 .protocol li b { color: var(--primary); }
 .protocol .actions { display: flex; gap: 10px; margin-top: 20px; }
+
+.multi-dialog { max-width: 460px; }
+.multi-text { color: var(--body); font-size: 15px; line-height: 1.6; margin: 0 0 4px; }
+.multi-text b { color: var(--primary); }
